@@ -57,7 +57,7 @@
     <ClCompile Include="source\src\mvsutils.cpp">
       <Filter>Source Files\MVS</Filter>
     </ClCompile>
-    <ClCompile Include="source\src\mvsi.cpp">
+    <ClCompile Include="source\src\OpenVersus.cpp">
       <Filter>Source Files\MVS</Filter>
     </ClCompile>
     <ClCompile Include="source\src\mvs.cpp">
@@ -98,17 +98,28 @@
     <ClInclude Include="framework.h">
       <Filter>Source Files</Filter>
     </ClInclude>
-    <ClInclude Include="source\src\mvsiutils.h">
+    <ClInclude Include="source\src\OVSUtils.h">
       <Filter>Header Files\MVS</Filter>
     </ClInclude>
-    <ClInclude Include="source\src\mvsi.h">
+    <ClInclude Include="source\src\OpenVersus.h">
       <Filter>Header Files\MVS</Filter>
     </ClInclude>
     <ClInclude Include="source\src\mvs.h">
       <Filter>Header Files\MVS</Filter>
     </ClInclude>
+    <ClInclude Include="mk12_enums.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="source\detours.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <None Include="cpp.hint" />
+    <None Include="README.md" />
+    <None Include=".gitignore" />
+    <None Include="source\sample.ini" />
+  </ItemGroup>
+  <ItemGroup>
+    <Library Include="source\detours.lib" />
   </ItemGroup>
 </Project>

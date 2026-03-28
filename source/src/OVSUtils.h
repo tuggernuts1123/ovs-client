@@ -49,57 +49,57 @@ template <typename T> void MakeProxyFromOpCode(Trampoline* GameTramp, uint64_t C
 class PatternFinder
 {
 private:
-	uint64_t address = 0;
+    uint64_t address = 0;
 
 public:
-	PatternFinder() = default;
-	PatternFinder(const std::string pattern) { *this = pattern; }
-	operator uint64_t () { return address; }
-	operator uint64_t* () { return (uint64_t*)address; }
-	operator __int64() { return __int64(address);  }
-	operator bool() { return bool(address); }
-	PatternFinder& operator+=(const uint64_t b) { address += b; return *this; }
-	PatternFinder& operator=(const std::string pattern)
-	{
-		uint64_t returned = CachedPatternsMgr->Load((char*)pattern.c_str());
+    PatternFinder() = default;
+    PatternFinder(const std::string pattern) { *this = pattern; }
+    operator uint64_t () { return address; }
+    operator uint64_t* () { return (uint64_t*)address; }
+    operator __int64() { return __int64(address);  }
+    operator bool() { return bool(address); }
+    PatternFinder& operator+=(const uint64_t b) { address += b; return *this; }
+    PatternFinder& operator=(const std::string pattern)
+    {
+        uint64_t returned = CachedPatternsMgr->Load((char*)pattern.c_str());
 
-		if (returned)
-			address = returned;
-		else
-		{
-			address = (uint64_t)FindPattern(pattern);
-			CachedPatternsMgr->Save((char*)pattern.c_str(), address);
-		}
+        if (returned)
+            address = returned;
+        else
+        {
+            address = (uint64_t)FindPattern(pattern);
+            CachedPatternsMgr->Save((char*)pattern.c_str(), address);
+        }
 
-		return *this;
-	}
-	PatternFinder operator+(const int b) {
-		PatternFinder obj;
-		obj.address = this->address + b;
-		return obj;
-	}
-	PatternFinder operator-(const int b) {
-		PatternFinder obj;
-		obj.address = this->address - b;
-		return obj;
-	}
-	PatternFinder operator+(const uint64_t b) {
-		PatternFinder obj;
-		obj.address = this->address + b;
-		return obj;
-	}
-	PatternFinder operator-(const uint64_t b) {
-		PatternFinder obj;
-		obj.address = this->address - b;
-		return obj;
-	}
+        return *this;
+    }
+    PatternFinder operator+(const int b) {
+        PatternFinder obj;
+        obj.address = this->address + b;
+        return obj;
+    }
+    PatternFinder operator-(const int b) {
+        PatternFinder obj;
+        obj.address = this->address - b;
+        return obj;
+    }
+    PatternFinder operator+(const uint64_t b) {
+        PatternFinder obj;
+        obj.address = this->address + b;
+        return obj;
+    }
+    PatternFinder operator-(const uint64_t b) {
+        PatternFinder obj;
+        obj.address = this->address - b;
+        return obj;
+    }
 };
 
 struct LibFuncStruct {
-	std::string FullName;
-	std::string LibName;
-	std::string ProcName;
-	bool bIsValid = false;
+    std::string FullName;
+    std::string LibName;
+    std::string ProcName;
+    bool bIsValid = false;
 };
 
 LibFuncStruct	ParseLibFunc(CPPython::string);
@@ -125,43 +125,45 @@ extern LibMap	IATable;
 template <typename T>
 void MakeProxyFromOpCode(Trampoline* GameTramp, uint64_t CallAddr, uint8_t JumpAddrSize, void* ProxyFunctionAddr, T** ProxyFuncPtr, PatchTypeEnum PatchType) // Jump size is either 4 or 8
 {
-	*ProxyFuncPtr = (T*)MakeProxyFromOpCode(GameTramp, CallAddr, JumpAddrSize, ProxyFunctionAddr, PatchType);
+    *ProxyFuncPtr = (T*)MakeProxyFromOpCode(GameTramp, CallAddr, JumpAddrSize, ProxyFunctionAddr, PatchType);
 }
 
 template <typename T>
 void GetProcFromOpCode(uint64_t CallAddr, uint8_t JumpAddrSize, T** ProxyFuncPtr) // Jump size is either 4 or 8
 {
-	CallAddr = GetGameAddr(CallAddr);
-	uint8_t callOpcSize = JumpAddrSize >> 2;
-	uint8_t funcLen = callOpcSize + JumpAddrSize;
-	uint64_t CalledFuncAddr = GetDestinationFromOpCode(CallAddr, callOpcSize, funcLen, JumpAddrSize);
-	*ProxyFuncPtr = (T*)CalledFuncAddr;
+    CallAddr = GetGameAddr(CallAddr);
+    uint8_t callOpcSize = JumpAddrSize >> 2;
+    uint8_t funcLen = callOpcSize + JumpAddrSize;
+    uint64_t CalledFuncAddr = GetDestinationFromOpCode(CallAddr, callOpcSize, funcLen, JumpAddrSize);
+    *ProxyFuncPtr = (T*)CalledFuncAddr;
 }
 
 static void DummyVoidFunc() {}
 static void* DummyPtrFunc(...) {return nullptr;}
-
+bool RunDumper();
+bool RunDumper(HMODULE hModule);
+bool RunDumper(HMODULE hModule, bool useExported);
 
 
 namespace RegisterHacks {
-	void					EnableRegisterHacks();
-	typedef void			(__fastcall MoveToRegister)(uint64_t);
-	typedef uint64_t		(__fastcall MoveFromRegister)();
+    void					EnableRegisterHacks();
+    typedef void			(__fastcall MoveToRegister)(uint64_t);
+    typedef uint64_t		(__fastcall MoveFromRegister)();
 
-	extern bool				bIsEnabled;
+    extern bool				bIsEnabled;
 
-	extern MoveToRegister*	MoveToRAX;
-	extern MoveToRegister*	MoveToRBX;
-	extern MoveToRegister*	MoveToRCX;
-	extern MoveToRegister*	MoveToRDX;
-	extern MoveToRegister*	MoveToR8;
-	extern MoveToRegister*	MoveToR9;
-	extern MoveToRegister*	MoveToR10;
-	extern MoveToRegister*	MoveToR11;
-	extern MoveToRegister*	MoveToR12;
-	extern MoveToRegister*	MoveToR13;
-	extern MoveToRegister*	MoveToR14;
-	extern MoveToRegister*	MoveToR15;
+    extern MoveToRegister*	MoveToRAX;
+    extern MoveToRegister*	MoveToRBX;
+    extern MoveToRegister*	MoveToRCX;
+    extern MoveToRegister*	MoveToRDX;
+    extern MoveToRegister*	MoveToR8;
+    extern MoveToRegister*	MoveToR9;
+    extern MoveToRegister*	MoveToR10;
+    extern MoveToRegister*	MoveToR11;
+    extern MoveToRegister*	MoveToR12;
+    extern MoveToRegister*	MoveToR13;
+    extern MoveToRegister*	MoveToR14;
+    extern MoveToRegister*	MoveToR15;
 
 }
 
