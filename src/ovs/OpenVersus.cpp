@@ -272,14 +272,14 @@ namespace OVS::Hooks {
         printf("\n==DisableSignatureCheck==\n");
         if (SettingsMgr->pSigCheck.empty())
         {
-            printfRed("pSigCheck Not Specified. Please Add Pattern to ini file!\n");
+            printfRed(L"pSigCheck Not Specified. Please Add Pattern to ini file!\n");
             return false;
         }
 
         PatternFinder lpSigCheckPattern = SettingsMgr->pSigCheck;
         if (!lpSigCheckPattern)
         {
-            printfError("Couldn't find SigCheck Pattern\n");
+            printfError(L"Couldn't find SigCheck Pattern\n");
             return false;
         }
 
@@ -301,7 +301,7 @@ namespace OVS::Hooks {
         );
 
 
-        printfSuccess("SigCheck Patched");
+        printfSuccess(L"SigCheck Patched");
 
         return true;
     }
@@ -312,14 +312,14 @@ namespace OVS::Hooks {
         std::string pattern = SettingsMgr->pSunsetDate;
         if (pattern.empty())
         {
-            printfError("pSunsetDate Not Specified. Please Add Pattern to ini file!");
+            printfError(L"pSunsetDate Not Specified. Please Add Pattern to ini file!");
             return false;
         }
 
         PatternFinder lpPattern = pattern;
         if (!lpPattern)
         {
-            printfError("Couldn't find SunsetDate Pattern");
+            printfError(L"Couldn't find SunsetDate Pattern");
             return false;
         }
 
@@ -369,7 +369,7 @@ namespace OVS::Hooks {
             nop_loc += 4;
         }
 
-        printfSuccess("Sunset Function Proxied");
+        printfSuccess(L"Sunset Function Proxied");
         return true;
     }
 
@@ -379,20 +379,20 @@ namespace OVS::Hooks {
         std::string pattern = SettingsMgr->pProdEndpointLoader;
         if (pattern.empty())
         {
-            printfError("pProdEndpointLoader Not Specified. Please Add Pattern to ini file!");
+            printfError(L"pProdEndpointLoader Not Specified. Please Add Pattern to ini file!");
             return false;
         }
 
         if (SettingsMgr->szProdServerUrl.empty())
         {
-            printfWarning("Prod Server Url is empty or not specified. Skipping!");
+            printfWarning(L"Prod Server Url is empty or not specified. Skipping!");
             return false;
         }
 
         PatternFinder lpPattern = pattern;
         if (!lpPattern)
         {
-            printfError("Couldn't find ProdEndpointLoader Pattern");
+            printfError(L"Couldn't find ProdEndpointLoader Pattern");
             return false;
         }
 
@@ -402,7 +402,7 @@ namespace OVS::Hooks {
 
         MakeProxyFromOpCode(GameTramp, lpPattern, 4, OVS::Proxies::OverrideProdEndpoint, &MVSGame::SetFStringValue, PATCH_CALL);
 
-        printfSuccess("ProdEndpointLoader Proxied");
+        printfSuccess(L"ProdEndpointLoader Proxied");
         return true;
     }
 
@@ -412,20 +412,20 @@ namespace OVS::Hooks {
         std::string pattern = SettingsMgr->pEndpointLoader;
         if (pattern.empty())
         {
-            printfError("pEndpointLoader Not Specified. Please Add Pattern to ini file!");
+            printfError(L"pEndpointLoader Not Specified. Please Add Pattern to ini file!");
             return false;
         }
 
         if (SettingsMgr->szServerUrl.empty())
         {
-            printfWarning("Server Url is empty or not specified. Skipping!");
+            printfWarning(L"Server Url is empty or not specified. Skipping!");
             return false;
         }
 
         PatternFinder lpPattern = pattern;
         if (!lpPattern)
         {
-            printfError("Couldn't find EndpointLoader Pattern");
+            printfError(L"Couldn't find EndpointLoader Pattern");
             return false;
         }
 
@@ -435,7 +435,7 @@ namespace OVS::Hooks {
 
         MakeProxyFromOpCode(GameTramp, lpPattern, 4, OVS::Proxies::OverrideGameEndpoint, &MVSGame::GetEndpointKeyValue, PATCH_CALL);
 
-        printfSuccess("EndpointLoader Proxied");
+        printfSuccess(L"EndpointLoader Proxied");
         return true;
     }
 
@@ -444,7 +444,7 @@ namespace OVS::Hooks {
         printf("\n==Dialog Funcs==\n");
         if (!HookMetadata::sActiveMods.bUEFuncs)
         {
-            printfError("UE Funcs were not enabled therefore Dialog cannot be used!");
+            printfError(L"UE Funcs were not enabled therefore Dialog cannot be used!");
             return false;
         }
 
@@ -452,13 +452,13 @@ namespace OVS::Hooks {
 
         if (SettingsMgr->pDialog.empty())
         {
-            printfError("pDialog Not Specified. Please Add Pattern to ini file!");
+            printfError(L"pDialog Not Specified. Please Add Pattern to ini file!");
             return false;
         }
         lpPattern = SettingsMgr->pDialog;
         if (!lpPattern)
         {
-            printfError("Couldn't find Dialog Pattern");
+            printfError(L"Couldn't find Dialog Pattern");
             return false;
         }
 
@@ -490,13 +490,13 @@ namespace OVS::Hooks {
 
         if (SettingsMgr->pDialogCallback.empty())
         {
-            printfError("pDialogCallback Not Specified. Please Add Pattern to ini file!");
+            printfError(L"pDialogCallback Not Specified. Please Add Pattern to ini file!");
             return false;
         }
         lpPattern = SettingsMgr->pDialogCallback;
         if (!lpPattern)
         {
-            printfError("Couldn't find DialogCallback Pattern");
+            printfError(L"Couldn't find DialogCallback Pattern");
             return false;
         }
 
@@ -511,7 +511,7 @@ namespace OVS::Hooks {
 
         if (SettingsMgr->pQuitGameCallback.empty())
         {
-            printfError("pQuitGameCallback Not Specified. Please Add Pattern to ini file!");
+            printfError(L"pQuitGameCallback Not Specified. Please Add Pattern to ini file!");
             return false;
         }
         else
@@ -519,7 +519,7 @@ namespace OVS::Hooks {
             lpPattern = SettingsMgr->pQuitGameCallback;
             if (!lpPattern)
             {
-                printfWarning("Couldn't find pQuitGameCallback Pattern. Going with alternative Shutdown mechanism!");
+                printfWarning(L"Couldn't find pQuitGameCallback Pattern. Going with alternative Shutdown mechanism!");
             }
             else
             {
@@ -533,7 +533,7 @@ namespace OVS::Hooks {
             }
         }
 
-        printfSuccess("Dialog Usable!");
+        printfSuccess(L"Dialog Usable!");
         return true;
     }
 
@@ -544,7 +544,7 @@ namespace OVS::Hooks {
         printf("\n==Notification Funcs==\n");
         if (!HookMetadata::sActiveMods.bUEFuncs)
         {
-            printfError("UE Funcs were not enabled therefore Notifications cannot be used!");
+            printfError(L"UE Funcs were not enabled therefore Notifications cannot be used!");
             return false;
         }
         
@@ -552,13 +552,13 @@ namespace OVS::Hooks {
 
         if (SettingsMgr->pNotifs.empty())
         {
-            printfError("pNotifs Not Specified. Please Add Pattern to ini file!");
+            printfError(L"pNotifs Not Specified. Please Add Pattern to ini file!");
             return false;
         }
         lpPattern = SettingsMgr->pNotifs; // This pattern finds 3 functions, but all of them are the exact same so any works
         if (!lpPattern)
         {
-            printfError("Couldn't find Notifications Pattern");
+            printfError(L"Couldn't find Notifications Pattern");
             return false;
         }
 
@@ -575,7 +575,7 @@ namespace OVS::Hooks {
         }
 
 
-        printfSuccess("Notifications Usable!");
+        printfSuccess(L"Notifications Usable!");
         return true;
     }
 
@@ -584,13 +584,13 @@ namespace OVS::Hooks {
         printf("\n==UE Funcs==\n");
         if (SettingsMgr->pFText.empty())
         {
-            printfError("pFText Not Specified. Please Add Pattern to ini file!");
+            printfError(L"pFText Not Specified. Please Add Pattern to ini file!");
             return false;
         }
         PatternFinder lpPattern = SettingsMgr->pFText;
         if (!lpPattern)
         {
-            printfError("Couldn't find FText Pattern");
+            printfError(L"Couldn't find FText Pattern");
             return false;
         }
 
@@ -614,13 +614,13 @@ namespace OVS::Hooks {
 
         if (SettingsMgr->pCFName.empty())
         {
-            printfError("pCFName Not Specified. Please Add Pattern to ini file!");
+            printfError(L"pCFName Not Specified. Please Add Pattern to ini file!");
             return false;
         }
         lpPattern = SettingsMgr->pCFName;
         if (!lpPattern)
         {
-            printfError("Couldn't find CFName Pattern");
+            printfError(L"Couldn't find CFName Pattern");
             return false;
         }
 
@@ -633,13 +633,13 @@ namespace OVS::Hooks {
 
         if (SettingsMgr->pWCFname.empty())
         {
-            printfError("pWCFname Not Specified. Please Add Pattern to ini file!");
+            printfError(L"pWCFname Not Specified. Please Add Pattern to ini file!");
             return false;
         }
         lpPattern = SettingsMgr->pWCFname;
         if (!lpPattern)
         {
-            printfError("Couldn't find WCFname Pattern");
+            printfError(L"Couldn't find WCFname Pattern");
             return false;
         }
         if (SettingsMgr->iLogLevel)
@@ -657,13 +657,13 @@ namespace OVS::Hooks {
 
         if (SettingsMgr->pFighterInstance.empty())
         {
-            printfError("pFighterInstance Not Specified. Please Add Pattern to ini file!");
+            printfError(L"pFighterInstance Not Specified. Please Add Pattern to ini file!");
             return false;
         }
         lpPattern = SettingsMgr->pFighterInstance;
         if (!lpPattern)
         {
-            printfError("Couldn't find FighterInstance Pattern");
+            printfError(L"Couldn't find FighterInstance Pattern");
             return false;
         }
 
@@ -676,7 +676,7 @@ namespace OVS::Hooks {
             printf("FighterInstance Proxied from %p to %p\n", MVSGame::UFigherGameInstanceConst, OVS::Proxies::CopyFighterInstance);
         }
 
-        printfSuccess("All Required UE Funcs Found!");
+        printfSuccess(L"All Required UE Funcs Found!");
 
         return true;
     }

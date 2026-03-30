@@ -73,16 +73,16 @@ void CreateConsole()
     dwMode |= ENABLE_VIRTUAL_TERMINAL_PROCESSING;
     SetConsoleMode(HookMetadata::Console, dwMode);
 
-    printfCyan("OpenVersus - It's better than Parsec\n");
-    printfCyan("v%s\n\n", CURRENT_HOOK_VERSION);
-    printfCyan("Binary releases available at: https://github.com/christopher-conley/OpenVersus\n");
-    printfCyan("Source code and binary releases available at: https://github.com/openversus\n");
-    printfCyan("Maintained by RosettaSt0ned and the MVS community\n");
+    printfCyan(L"OpenVersus - It's better than Parsec\n");
+    printfCyan(L"v%s\n\n", CURRENT_HOOK_VERSION);
+    printfCyan(L"Binary releases available at: https://github.com/christopher-conley/OpenVersus\n");
+    printfCyan(L"Source code and binary releases available at: https://github.com/openversus\n");
+    printfCyan(L"Maintained by RosettaSt0ned and the MVS community\n");
 
-    printfCyan("OpenVersus is originally based on the publicly-available code developed by thethiny and multiversuskoth, located at: \n");
-    printfCyan("https://github.com/thethiny/MVSIASI\n");
-    printfCyan("https://github.com/multiversuskoth/mvs-http-server\n");
-    printfCyan("https://github.com/multiversuskoth/mvs-udp-server\n");
+    printfCyan(L"OpenVersus is originally based on the publicly-available code developed by thethiny and multiversuskoth, located at: \n");
+    printfCyan(L"https://github.com/thethiny/MVSIASI\n");
+    printfCyan(L"https://github.com/multiversuskoth/mvs-http-server\n");
+    printfCyan(L"https://github.com/multiversuskoth/mvs-udp-server\n");
 }
 
 void PreGameHooks()
@@ -134,7 +134,7 @@ void ProcessSettings()
     HookMetadata::sLFS.CurlSetOpt		= ParseLibFunc(SettingsMgr->szCurlSetOpt);
     HookMetadata::sLFS.CurlPerform		= ParseLibFunc(SettingsMgr->szCurlPerform);
 
-    printfCyan("Parsed Settings\n");
+    printfCyan(L"Parsed Settings\n");
 }
 
 void SpawnError(const char* msg)
@@ -744,7 +744,7 @@ bool APIENTRY DllMain(HMODULE hModule, DWORD reason, LPVOID lpRes)
     switch (reason)
     {
     case DLL_PROCESS_ATTACH:
-        printfInfo("On Attach Initialize");
+        printfInfo(L"On Attach Initialize");
         OnInitializeHook();
         InitializeKeyboard();
         break;
