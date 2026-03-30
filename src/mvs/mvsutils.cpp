@@ -286,7 +286,7 @@ void SetCheatPattern(std::string pattern, std::string name, uint64_t** lpPattern
         }
         else
         {
-            printfError(L  "%s Not Found >> Disabled.", wName);
+            printfError(L"%s Not Found >> Disabled.", wName);
         }
     }
 }
