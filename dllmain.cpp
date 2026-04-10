@@ -746,7 +746,7 @@ bool OnInitializeHook()
     }
     else
     {
-        printfWarning(L"[AutoUpdate] AutoUpdate is disabled in your config file. Don't be suprised if the game doesn't work correctly, or if it doesn't even work at all.");
+        printfWarning(L"[AutoUpdate] AutoUpdate is disabled in your config file. Don't be surprised if the game doesn't work correctly, or if it doesn't even work at all.");
         printfWarning(L"[AutoUpdate] The latest version of OpenVersus can always be obtained from: https://github.com/christopher-conley/OpenVersus");
         wprintf(L"\n");
         printfWarning(L"[AutoUpdate] If you want to enable auto-updates, set AutoUpdate=true in the [Settings] section of your config file.");
